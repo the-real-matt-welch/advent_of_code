@@ -1,0 +1,11 @@
+[package]
+name = "advent_of_code"
+version = "0.1.0"
+edition = "2021"
+description = "Matt Welch's Advent of Code rust solutions"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+regex = "1.10.5"
+clap = { version = "4.5.20", features = ["derive"] }
