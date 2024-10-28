@@ -1,3 +1,4 @@
 target/
 inputs/
 test_inputs/
+.gdb_history
