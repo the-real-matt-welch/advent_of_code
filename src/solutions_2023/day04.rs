@@ -61,5 +61,5 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
             counts[j] += counts[i];
         }
     }
-    counts.iter().sum::<u32>()
+    counts.into_iter().sum::<u32>()
 }
