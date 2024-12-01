@@ -42,9 +42,6 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     }
     list1
         .iter()
-        .map(|n| match counts.get(n) {
-            Some(a) => n * a,
-            _ => 0,
-        })
+        .map(|n| *n * *counts.entry(n).or_insert(0))
         .sum::<u32>()
 }
