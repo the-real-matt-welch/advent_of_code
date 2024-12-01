@@ -1,16 +1,15 @@
 use std::{collections::HashMap, fmt::Debug};
 
 pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
-    let mut list1: Vec<u32> = Vec::new();
-    let mut list2: Vec<u32> = Vec::new();
+    let mut list1 = Vec::new();
+    let mut list2 = Vec::new();
 
     for line in input {
         let mut numbers = line
-            .split(" ")
-            .filter(|s| *s != "")
+            .split("   ")
             .map(|s| s.parse::<u32>());
-        list1.push(numbers.next().unwrap().expect(""));
-        list2.push(numbers.next().unwrap().expect(""));
+        list1.push(numbers.next().unwrap().unwrap());
+        list2.push(numbers.next().unwrap().unwrap());
     }
 
     list1.sort_unstable();
@@ -24,24 +23,24 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 }
 
 pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
-    let mut list1: Vec<u32> = Vec::new();
-    let mut list2: Vec<u32> = Vec::new();
+    let mut list1 = Vec::new();
+    let mut list2 = Vec::new();
 
     for line in input {
         let mut numbers = line
-            .split(" ")
-            .filter(|s| *s != "")
+            .split("   ")
             .map(|s| s.parse::<u32>());
-        list1.push(numbers.next().unwrap().expect(""));
-        list2.push(numbers.next().unwrap().expect(""));
+        list1.push(numbers.next().unwrap().unwrap());
+        list2.push(numbers.next().unwrap().unwrap());
     }
 
     let mut counts = HashMap::new();
     for num in &list2 {
         counts.entry(num).and_modify(|x| *x += 1).or_insert(1);
     }
+
     list1
         .iter()
-        .map(|n| *n * *counts.entry(n).or_insert(0))
+        .map(|n| *n * *counts.get(n).unwrap_or(&0))
         .sum::<u32>()
 }
