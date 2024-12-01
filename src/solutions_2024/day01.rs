@@ -7,7 +7,6 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     for line in input {
         let mut numbers = line
             .split(" ")
-            .map(|s| s.trim())
             .filter(|s| *s != "")
             .map(|s| s.parse::<u32>());
         list1.push(numbers.next().unwrap().expect(""));
@@ -31,7 +30,6 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     for line in input {
         let mut numbers = line
             .split(" ")
-            .map(|s| s.trim())
             .filter(|s| *s != "")
             .map(|s| s.parse::<u32>());
         list1.push(numbers.next().unwrap().expect(""));
