@@ -7,9 +7,9 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     for line in input {
         let mut numbers = line
             .split("   ")
-            .map(|s| s.parse::<u32>());
-        list1.push(numbers.next().unwrap().unwrap());
-        list2.push(numbers.next().unwrap().unwrap());
+            .map(|s| s.parse::<u32>().unwrap());
+        list1.push(numbers.next().unwrap());
+        list2.push(numbers.next().unwrap());
     }
 
     list1.sort_unstable();
@@ -29,9 +29,9 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     for line in input {
         let mut numbers = line
             .split("   ")
-            .map(|s| s.parse::<u32>());
-        list1.push(numbers.next().unwrap().unwrap());
-        list2.push(numbers.next().unwrap().unwrap());
+            .map(|s| s.parse::<u32>().unwrap());
+        list1.push(numbers.next().unwrap());
+        list2.push(numbers.next().unwrap());
     }
 
     let mut counts = HashMap::new();
@@ -41,6 +41,6 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 
     list1
         .iter()
-        .map(|n| *n * *counts.get(n).unwrap_or(&0))
+        .map(|n| n * counts.get(n).unwrap_or(&0))
         .sum::<u32>()
 }
