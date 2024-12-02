@@ -7,22 +7,7 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
             .split_whitespace()
             .map(|s| s.parse::<i32>().unwrap())
             .collect();
-        let mut safe = 1;
-        let mut direction = 0;
-        for (i, level) in levels.windows(2).enumerate() {
-            if i == 0 {
-                direction = level[1] - level[0]
-            }
-
-            if (level[1] - level[0]) * direction < 0 {
-                safe = 0;
-            } else if level[1].abs_diff(level[0]) < 1
-                || level[1].abs_diff(level[0]) > 3
-            {
-                safe = 0;
-            }
-        }
-        total += safe;
+        total += safe(levels) as i32;
     }
     total
 }
@@ -37,26 +22,9 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 
         let mut safes = 0;
         for thing in variations(levels) {
-            let mut safe = 1;
-            let mut direction = 0;
-            for (i, level) in thing.windows(2).enumerate() {
-                if i == 0 {
-                    direction = level[1] - level[0]
-                }
-
-                if (level[1] - level[0]) * direction < 0 {
-                    safe = 0;
-                } else if level[1].abs_diff(level[0]) < 1
-                    || level[1].abs_diff(level[0]) > 3
-                {
-                    safe = 0;
-                }
-            }
-            safes += safe;
+            safes += safe(thing) as i32;
         }
-        if safes > 0 {
-            total += 1;
-        }
+        total += (safes > 0) as i32;
     }
     total
 }
@@ -74,4 +42,22 @@ fn variations(levels: Vec<i32>) -> Vec<Vec<i32>> {
         vars.push(new);
     }
     vars
+}
+
+fn safe(levels: Vec<i32>) -> bool {
+    let mut direction = 0;
+    for (i, level) in levels.windows(2).enumerate() {
+        if i == 0 {
+            direction = level[1] - level[0]
+        }
+
+        if (level[1] - level[0]) * direction < 0 {
+            return false;
+        } else if level[1].abs_diff(level[0]) < 1
+            || level[1].abs_diff(level[0]) > 3
+        {
+            return false;
+        }
+    }
+    return true;
 }
