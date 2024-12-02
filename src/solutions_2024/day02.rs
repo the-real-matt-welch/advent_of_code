@@ -45,17 +45,11 @@ fn variations(levels: Vec<i32>) -> Vec<Vec<i32>> {
 }
 
 fn safe(levels: Vec<i32>) -> bool {
-    let mut direction = 0;
+    let direction = levels[1] - levels[0];
     for (i, level) in levels.windows(2).enumerate() {
-        if i == 0 {
-            direction = level[1] - level[0]
-        }
-
         if (level[1] - level[0]) * direction < 0 {
             return false;
-        } else if level[1].abs_diff(level[0]) < 1
-            || level[1].abs_diff(level[0]) > 3
-        {
+        } else if !(1..=3).contains(&level[1].abs_diff(level[0])) {
             return false;
         }
     }
