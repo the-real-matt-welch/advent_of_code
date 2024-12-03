@@ -45,7 +45,7 @@ fn main() {
     let raw = fs::read_to_string(path).expect("Error reading input file");
     let input: Vec<&str> = raw[..raw.len() - 1].lines().collect();
 
-    for (i, part) in parts.iter().enumerate() {
+    for part in &parts {
         println!(
             "Part {part}\n\
                   -------"
