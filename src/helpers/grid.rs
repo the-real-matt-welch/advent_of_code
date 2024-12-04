@@ -110,16 +110,57 @@ impl Grid {
         i: usize,
         j: usize,
     ) -> Vec<(Option<char>, usize, usize)> {
-        vec![
-            (self.above(i, j), i - 1, j),
-            (self.below(i, j), i + 1, j),
-            (self.left(i, j), i, j - 1),
-            (self.right(i, j), i, j + 1),
-            (self.top_left(i, j), i - 1, j - 1),
-            (self.top_right(i, j), i - 1, j + 1),
-            (self.bottom_left(i, j), i + 1, j - 1),
-            (self.bottom_right(i, j), i + 1, j + 1),
-        ]
+        let mut result = Vec::with_capacity(8);
+
+        if let Some(thing) = self.above(i, j) {
+            result.push((Some(thing), i - 1, j));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.below(i, j) {
+            result.push((Some(thing), i + 1, j));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.left(i, j) {
+            result.push((Some(thing), i, j - 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.right(i, j) {
+            result.push((Some(thing), i, j + 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.top_left(i, j) {
+            result.push((Some(thing), i - 1, j - 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.top_right(i, j) {
+            result.push((Some(thing), i - 1, j + 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.bottom_left(i, j) {
+            result.push((Some(thing), i + 1, j - 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.bottom_right(i, j) {
+            result.push((Some(thing), i + 1, j + 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        result
     }
 }
 
