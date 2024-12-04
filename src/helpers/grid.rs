@@ -60,6 +60,40 @@ impl Grid {
         ]
     }
 
+    pub fn neighbours_4n_index(
+        &self,
+        i: usize,
+        j: usize,
+    ) -> Vec<(Option<char>, usize, usize)> {
+        let mut result = Vec::with_capacity(8);
+
+        if let Some(thing) = self.above(i, j) {
+            result.push((Some(thing), i - 1, j));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.below(i, j) {
+            result.push((Some(thing), i + 1, j));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.left(i, j) {
+            result.push((Some(thing), i, j - 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        if let Some(thing) = self.right(i, j) {
+            result.push((Some(thing), i, j + 1));
+        } else {
+            result.push((None, 0, 0));
+        }
+
+        result
+    }
+
     pub fn top_left(&self, i: usize, j: usize) -> Option<char> {
         if i == 0 || j == 0 {
             None
