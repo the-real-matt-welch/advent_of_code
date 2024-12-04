@@ -3,34 +3,30 @@ use std::fmt::Debug;
 use crate::helpers::grid::Grid;
 
 pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
+    // this solution is pretty awful but i'm too lazy to make a good one
     let mut total = 0;
-    for line in input {
-        total += line.matches("XMAS").count();
-        total += line.matches("SAMX").count();
-    }
-
-    let mut transposed = Vec::new();
-    for i in 0..input[0].len() {
-        let mut s = String::new();
-        for j in 0..input.len() {
-            s.push(input[j].chars().collect::<Vec<char>>()[i]);
-        }
-        transposed.push(s);
-    }
-    for line in transposed {
-        total += line.matches("XMAS").count();
-        total += line.matches("SAMX").count();
-    }
 
     let n = input.len() + input[0].len() - 1;
-    let mut diagonals: Vec<String> = vec![String::new(); n];
-    let mut other_diagonals: Vec<String> = vec![String::new(); n];
+    let mut transposed = vec![String::new(); input[0].len()];
+    let mut diagonals = vec![String::new(); n];
+    let mut other_diagonals = vec![String::new(); n];
+
     for (i, line) in input.iter().enumerate() {
         for (j, c) in line.chars().enumerate() {
             let index = diagonals.len() + i - j - input[0].len();
             diagonals[index].push(c);
             other_diagonals[i + j].push(c);
+            transposed[j].push(input[i].as_bytes()[j] as char);
         }
+    }
+
+    for line in input {
+        total += line.matches("XMAS").count();
+        total += line.matches("SAMX").count();
+    }
+    for line in transposed {
+        total += line.matches("XMAS").count();
+        total += line.matches("SAMX").count();
     }
     for line in diagonals {
         total += line.matches("XMAS").count();
