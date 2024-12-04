@@ -3,3 +3,4 @@ inputs/
 test_inputs/
 .gdb_history
 advent_of_code
+.env
