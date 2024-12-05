@@ -1,4 +1,4 @@
-use std::{collections::{HashMap, HashSet}, fmt::Debug};
+use std::{collections::HashMap, fmt::Debug};
 
 pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     let mut prereqs: HashMap<u32, Vec<u32>> = HashMap::new();
@@ -53,12 +53,10 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 }
 
 fn in_order(line: &Vec<u32>, prereqs: &HashMap<u32, Vec<u32>>) -> bool {
-    let mut seen = HashSet::with_capacity(line.len());
-    for num in line {
-        seen.insert(num);
+    for (i, num) in line.iter().enumerate() {
         for value in prereqs.get(num).unwrap_or(&Vec::new()) {
-            if !seen.contains(value) && line.contains(value) {
-                return false
+            if let Some(j) = line.iter().position(|x| x == value) {
+                if i < j { return false }
             }
         }
     }
