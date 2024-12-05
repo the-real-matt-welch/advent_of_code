@@ -10,7 +10,7 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
         }
         let (value, key) = line.split_once('|').unwrap();
         prereqs
-            .entry(key.parse::<u32>().unwrap())
+            .entry(key.parse().unwrap())
             .and_modify(|x| x.push(value.parse().unwrap()))
             .or_insert(vec![value.parse().unwrap()]);
     }
@@ -36,7 +36,7 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
         }
         let (value, key) = line.split_once('|').unwrap();
         prereqs
-            .entry(key.parse::<u32>().unwrap())
+            .entry(key.parse().unwrap())
             .and_modify(|x| x.push(value.parse().unwrap()))
             .or_insert(vec![value.parse().unwrap()]);
     }
@@ -55,8 +55,9 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 fn in_order(line: &Vec<u32>, prereqs: &HashMap<u32, Vec<u32>>) -> bool {
     for (i, num) in line.iter().enumerate() {
         for value in prereqs.get(num).unwrap_or(&Vec::new()) {
-            if let Some(j) = line.iter().position(|x| x == value) {
-                if i < j { return false }
+            let j = line.iter().position(|x| x == value).unwrap_or(0);
+            if i < j {
+                return false;
             }
         }
     }
@@ -72,7 +73,7 @@ fn reordered(line: &Vec<u32>, prereqs: &HashMap<u32, Vec<u32>>) -> Vec<u32> {
             }
             let mut good = true;
             for value in prereqs.get(&num).unwrap_or(&vec![]) {
-                if !better.contains(value) && line.contains(value){
+                if !better.contains(value) && line.contains(value) {
                     good = false;
                     break;
                 }
