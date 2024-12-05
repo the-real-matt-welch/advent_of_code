@@ -4,7 +4,7 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     let mut prereqs: HashMap<u32, Vec<u32>> = HashMap::new();
     let mut blank = 0;
     for (i, line) in input.iter().enumerate() {
-        if line.len() < 2 {
+        if line.is_empty() {
             blank = i;
             break;
         }
@@ -30,7 +30,7 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     let mut prereqs: HashMap<u32, Vec<u32>> = HashMap::new();
     let mut blank = 0;
     for (i, line) in input.iter().enumerate() {
-        if line.len() < 2 {
+        if line.is_empty() {
             blank = i;
             break;
         }
@@ -55,8 +55,7 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 fn in_order(line: &Vec<u32>, prereqs: &HashMap<u32, Vec<u32>>) -> bool {
     for (i, num) in line.iter().enumerate() {
         for value in prereqs.get(num).unwrap_or(&Vec::new()) {
-            let j = line.iter().position(|x| x == value).unwrap_or(0);
-            if i < j {
+            if line.iter().position(|x| x == value).is_some_and(|j| i < j) {
                 return false;
             }
         }

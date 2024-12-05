@@ -42,8 +42,9 @@ fn main() {
     } else {
         format!("inputs/{}/day{:0>2}.txt", args.year, args.day)
     };
+    // TODO: Refactor project so that parts take string input and return ()
     let raw = fs::read_to_string(path).expect("Error reading input file");
-    let input: Vec<&str> = raw[..raw.len() - 1].lines().collect();
+    let input: Vec<&str> = raw.lines().collect();
 
     for part in &parts {
         println!(
