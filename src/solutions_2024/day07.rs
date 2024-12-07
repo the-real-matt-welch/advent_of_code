@@ -52,8 +52,7 @@ fn valid_2(nums: &Vec<&str>, solution: u64) -> bool {
     for comb in 0..(3_u64.pow(nums.len() as u32 - 1)) {
         let mut total = String::from(nums[0]);
         for (i, num) in nums[1..].iter().enumerate() {
-            let digits = digits(comb, 3, nums.len() - 1);
-            match digits[i] {
+            match (comb / 3_u64.pow(i as u32)) % 3 {
                 0 => {
                     total = (total.parse::<u64>().unwrap()
                         + num.parse::<u64>().unwrap())
@@ -73,18 +72,4 @@ fn valid_2(nums: &Vec<&str>, solution: u64) -> bool {
         }
     }
     false
-}
-
-fn digits(num: u64, base: u64, size: usize) -> Vec<u64> {
-    let mut n = num;
-    let mut result = Vec::new();
-    while n > 0 {
-        result.push(n % base);
-        n /= base;
-    }
-    result.push(n);
-    while result.len() < size {
-        result.push(0);
-    }
-    result
 }
