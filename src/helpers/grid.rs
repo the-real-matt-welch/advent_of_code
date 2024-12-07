@@ -1,4 +1,4 @@
-use std::fmt::{Debug, Display};
+use std::{fmt::{Debug, Display}, usize};
 
 pub struct Grid {
     width: usize,
@@ -17,6 +17,10 @@ impl Grid {
 
     pub fn at(&self, i: usize, j: usize) -> char {
         self.data[self.width * i + j]
+    }
+
+    pub fn replace(&mut self, i: usize, j: usize, new: char) {
+        self.data[self.width * i + j] = new;
     }
 
     pub fn above(&self, i: usize, j: usize) -> Option<char> {
