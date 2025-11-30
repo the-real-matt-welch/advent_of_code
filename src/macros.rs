@@ -4,6 +4,7 @@ macro_rules! solve {
         match $year {
             2023 => day!(solutions_2023, $day, $part, $input),
             2024 => day!(solutions_2024, $day, $part, $input),
+            2025 => day!(solutions_2025, $day, $part, $input),
             _ => unreachable!()
         }
     };

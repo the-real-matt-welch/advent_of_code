@@ -9,6 +9,7 @@ mod helpers;
 mod macros;
 mod solutions_2023;
 mod solutions_2024;
+mod solutions_2025;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
