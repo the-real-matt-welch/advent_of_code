@@ -3,7 +3,7 @@ use std::fmt::Debug;
 pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     let mut count = 0;
     let mut start: i32 = 50;
-    input[..input.len()].iter().for_each(|line| {
+    input.iter().for_each(|line| {
         let (direction, n) = line.split_at(1);
         let n = n.parse::<i32>().unwrap();
         if direction == "R" {
@@ -19,7 +19,7 @@ pub fn part1<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
 pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
     let mut count = 0;
     let mut start: i32 = 50;
-    input[..input.len()].iter().for_each(|line| {
+    input.iter().for_each(|line| {
         let (direction, n) = line.split_at(1);
         let n = n.parse::<i32>().unwrap();
         if direction == "R" {
