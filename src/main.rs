@@ -20,8 +20,8 @@ struct Arguments {
     #[arg(short, long, value_parser = clap::value_parser!(u8).range(1..=25))]
     day: u8,
 
-    #[arg(short, long, default_value_t = 2024,
-        value_parser = clap::value_parser!(u16).range(2023..=2024))]
+    #[arg(short, long, default_value_t = 2025,
+        value_parser = clap::value_parser!(u16).range(2023..=2025))]
     year: u16,
 
     #[arg(short, long)]
