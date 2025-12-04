@@ -26,6 +26,7 @@ pub fn part2<'a>(input: &'a Vec<&'a str>) -> impl Debug + 'a {
         new = old;
         old += remove_and_count(&mut grid);
     }
+    println!("{}", grid);
     new
 }
 

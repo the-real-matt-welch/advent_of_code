@@ -231,7 +231,7 @@ impl Display for Grid {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for i in 0..self.height {
             for j in 0..self.width {
-                write!(f, "[{}]", self.at(i, j))?
+                write!(f, "{}", self.at(i, j))?
             }
             writeln!(f)?;
         }
@@ -241,6 +241,12 @@ impl Display for Grid {
 
 impl Debug for Grid {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self)
+        for i in 0..self.height {
+            for j in 0..self.width {
+                write!(f, "[{}]", self.at(i, j))?
+            }
+            writeln!(f)?;
+        }
+        Ok(())
     }
 }
