@@ -202,36 +202,28 @@ impl Grid {
     }
 }
 
-#[derive(Debug)]
-pub enum GridCreationError {
-    DimensionMismatch,
-    Empty,
-}
-
-impl TryFrom<&Vec<&str>> for Grid {
-    type Error = GridCreationError;
-
-    fn try_from(lines: &Vec<&str>) -> Result<Self, Self::Error> {
+impl From<&Vec<&str>> for Grid {
+    fn from(lines: &Vec<&str>) -> Self {
         let height = lines.len();
         if height == 0 {
-            return Err(Self::Error::Empty);
+            panic!("Grid is empty");
         }
         let width = lines[0].len();
         let mut data = vec![];
 
         for line in lines {
             if line.len() != width {
-                return Err(Self::Error::DimensionMismatch);
+                panic!("Not a rectangle dumbass");
             }
             for chr in line.chars() {
                 data.push(chr);
             }
         }
-        Ok(Self {
+        Self {
             width,
             height,
             data,
-        })
+        }
     }
 }
 
