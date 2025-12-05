@@ -9,3 +9,4 @@ description = "Matt Welch's Advent of Code rust solutions"
 [dependencies]
 regex = "1.10.5"
 clap = { version = "4.5.20", features = ["derive"] }
+range_union_find = "0.5.0"
